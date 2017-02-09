@@ -36963,6 +36963,7 @@ var app = new Vue({
         var _this = this;
 
         window.Echo.channel('crawler').listen('UrlHasBeenCrawled', function (event) {
+            console.log('event UrlHasBeenCrawled');
             _this.$store.commit('addCrawledUrl', new __WEBPACK_IMPORTED_MODULE_1__store_CrawledUrl__["a" /* default */](event.data));
         });
 
