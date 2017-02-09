@@ -13,8 +13,45 @@ require('./bootstrap');
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-Vue.component('example', require('./components/Example.vue'));
+
+import store from './store/index';
+import CrawledUrl from './store/CrawledUrl';
+import VueRouter from 'vue-router'
+
+import Errors from './components/Errors.vue';
+import CrawledList from './components/CrawledList.vue';
+import Dashboard from './components/Dashboard.vue';
+import AppHeader from './components/AppHeader.vue';
+
+Vue.component('CrawledList', CrawledList);
+Vue.component('Errors', Errors);
+Vue.component('Dashboard', Dashboard);
+Vue.component('AppHeader', AppHeader);
+
+Vue.use(VueRouter)
+const routes = [
+    { path: '/', component: Dashboard },
+    { path: '/errors', component: Errors },
+    { path: '/all', component: CrawledList }
+]
+
+const router = new VueRouter({
+    mode: 'history',
+    routes
+})
 
 const app = new Vue({
-    el: '#app'
+    router,
+    store,
+    el: '#app',
+
+    created() {
+        window.Echo.channel('crawler').listen('UrlHasBeenCrawled', (event) => {
+            this.$store.commit('addCrawledUrl', new CrawledUrl(event.data));
+    });
+
+        window.Echo.channel('crawler').listen('CrawlHasEnded', (event) => {
+            this.$store.commit('crawlHasEnded');
+    });
+    },
 });
