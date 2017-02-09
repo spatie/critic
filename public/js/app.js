@@ -37863,6 +37863,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         }
     },
 
+    data: function data() {
+        return {
+            url: ''
+        };
+    },
+
+
     methods: {
         startCrawling: function startCrawling() {
             this.$store.dispatch('startCrawling', this.url);

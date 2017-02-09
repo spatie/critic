@@ -39,6 +39,12 @@ export default {
         },
     },
 
+    data() {
+        return {
+            url: '',
+        };
+    },
+
     methods: {
         startCrawling() {
             this.$store.dispatch('startCrawling', this.url)
