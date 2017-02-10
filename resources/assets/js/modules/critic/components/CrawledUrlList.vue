@@ -29,23 +29,15 @@
 </template>
 
 <script>
-    export default {
-        computed: {
-            activeUrl() {
-                return this.$store.state.activeUrl
-            },
+import { mapGetters } from 'vuex';
 
-            hasActiveUrl() {
-                return this.activeUrl != '';
-            },
-
-            crawlCount () {
-                return this.$store.state.crawledUrls.length;
-            },
-
-            crawledUrls () {
-                return this.$store.state.crawledUrls;
-            },
-        },
-    }
+export default {
+    computed: {
+        ...mapGetters([
+            'crawledUrls',
+            'crawlCount',
+            'hasActiveUrl',
+        ]),
+    },
+}
 </script>

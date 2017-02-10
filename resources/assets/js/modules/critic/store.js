@@ -1,3 +1,4 @@
+import axios from 'axios';
 import CrawledUrl from './CrawledUrl';
 
 export default {
@@ -9,8 +10,11 @@ export default {
 
     getters: {
         activeUrl: ({ activeUrl }) => activeUrl,
+        hasActiveUrl: ({ activeUrl }) => activeUrl != '',
         crawledUrls: ({ crawledUrls }) => crawledUrls,
-        errors: ({ crawledUrls }) => crawledUrls.filter(u => u.isError()),
+        crawlCount: ({ crawledUrls }) => crawledUrls.length,
+        crawlErrors: ({ crawledUrls }) => crawledUrls.filter(u => u.isError()),
+        crawlErrorCount: (_, { crawlErrors }) => crawlErrors.length,
     },
 
     mutations: {

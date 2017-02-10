@@ -1,38 +1,33 @@
 <template>
     <div>
         <h2>Non 2xx responses</h2>
-        <span>Amount of errors: {{ errors.length }}</span>
+        <span>Amount of errors: {{ crawlErrorCount }}</span>
 
         <div v-show="hasActiveUrl">
-
-
             <table>
                 <tr>
                     <td>Status code</td>
                     <td>Url</td>
                 <tr/>
-
-                <tr v-for="crawledUrl in errors">
+                <tr v-for="crawledUrl in crawlErrors">
                     <td>{{ crawledUrl.statusCode }}</td>
                     <td>{{ crawledUrl.url }}</td>
                 <tr>
-
             </table>
         </div>
-
     </div>
 </template>
 
 <script>
-    export default {
-        computed: {
-            errors () {
-                return this.$store.getters.errors;
-            },
+import { mapGetters } from 'vuex';
 
-            hasActiveUrl() {
-                return this.activeUrl != '';
-            },
-        },
-    }
+export default {
+    computed: {
+        ...mapGetters([
+            'crawlErrors',
+            'crawlErrorCount',
+            'hasActiveUrl',
+        ]),
+    },
+}
 </script>
