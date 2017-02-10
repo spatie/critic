@@ -10,23 +10,27 @@
 </template>
 
 <script>
-    export default {
-        computed: {
-            crawlCount () {
-                return this.$store.state.crawledUrls.length;
-            },
+import { mapGetters } from 'vuex';
 
-            errorCount () {
-                return this.$store.getters.errors.length;
-            },
+export default {
+    computed: {
+        ...mapGetters([
+            'crawledUrls',
+            'errors',
+            'activeUrl',
+        ]),
 
-            activeUrl() {
-                return this.$store.state.activeUrl
-            },
-
-            hasActiveUrl() {
-                return this.activeUrl != '';
-            },
+        crawlCount () {
+            return this.crawledUrls.length;
         },
-    }
+
+        errorCount () {
+            return this.errors.length;
+        },
+
+        hasActiveUrl() {
+            return this.activeUrl != '';
+        },
+    },
+};
 </script>

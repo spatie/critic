@@ -13,8 +13,9 @@
 
 <script>
     window.Laravel = {!! json_encode([
-            'csrfToken' => csrf_token(),
-        ]) !!};
+        'csrfToken' => csrf_token(),
+        'pusherKey' => config('broadcasting.connections.pusher.key'),
+    ]) !!};
 </script>
 <script src="{{ elixir('js/app.js') }}" ></script>
 
