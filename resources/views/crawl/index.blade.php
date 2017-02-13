@@ -2,7 +2,7 @@
 
 @section('content')
 
-    @javascript(compact('pusherKey'))
+    @javascript(compact('pusherKey', 'pusherCluster'))
 
     <div id="app">
         <app-header></app-header>

@@ -42,5 +42,6 @@ import Echo from "laravel-echo";
 
 window.Echo = new Echo({
     broadcaster: 'pusher',
-    key: window.pusherKey
+    key: window.pusherKey,
+    cluster: window.pusherCluster,
 });
